@@ -3,9 +3,9 @@
 
 import requests
 
-'''
+"""
 Practice on 'requests'
-'''
+"""
 
 def test_cookies():
 	my_requests = requests.session()
@@ -34,7 +34,7 @@ def test_get_post():
 	payload = {
 		'key1': 'value1',
 		'key2': 'value2'
-		}	
+		}
 	# use params
 	r = requests.get("http://httpbin.org/get", params=payload)
 	print r.text	
@@ -45,6 +45,9 @@ def test_get_post():
 	# get
 	r3 = requests.get("http://httpbin.org/get?key3=value3&key4=value4")
 	print r3.text
+	# status code
+	r4 = requests.get('http://httpbin.org/get')
+	print r.status_code == requests.codes.ok
 
 def test_json():
 	url = "https://raw.githubusercontent.com/openshift/origin/master/examples/hello-openshift/hello-pod.json"
