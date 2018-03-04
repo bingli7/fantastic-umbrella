@@ -12,29 +12,30 @@ class Online_repo(object):
         self.url_starter_template = self.url_prefix + "/pro/templates"
 
     def get_starter_is(self, token):
-        # HTTP header
-        self.headers = {
+        # store the imagestream tag info
+        istag_dict = {}
+        # HTTP header, including the github token for developers
+        headers = {
             'Authorization': 'token ' + token
         }
         # new session
         self.session = requests.session()
-        response = self.session.get(self.url_starter_is, headers=self.headers)
+        response = self.session.get(self.url_starter_is, headers=headers)
         # json 'loads' to a python list
         json_is = json.loads(response.text)
+        # is_item: dict type
         for is_item in json_is:
-            response = self.session.get(is_item['download_url'], headers=self.headers)
+            response = self.session.get(is_item['download_url'], headers=headers)
+            # return dict
             json_response = json.loads(response.text)
-            print type('json_response')
-            print json_response['metadata']['name']
-            is_dict = {
-                    json_response['metadata']['name']: []
-                }
-#            for tag_item in json_response['spec']['tags']:
-
+            istag_dict[json_response['metadata']['name']] = []
+            for tag_item in json_response['spec']['tags']:
+                istag_dict[json_response['metadata']['name']].append(tag_item['name'])
+        print istag_dict
 
 
 
 if __name__ == "__main__":
-    token = '63e01599454421ada46186a8a9415288b5d993e5'
+    token = ''
     starter_is = Online_repo()
     starter_is.get_starter_is(token)
