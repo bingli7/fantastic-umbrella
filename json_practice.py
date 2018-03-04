@@ -23,8 +23,7 @@ def json_dump_load():
 	# load from a file to a python dict
 	with open(filename, 'r') as file:
 		file_data = json.load(file)
-	print type(file_data)
-	print file_data
+	print type(file_data[0])
 
 	# dump
 	new_filename = 'project_copy.json'
