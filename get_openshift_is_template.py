@@ -9,7 +9,8 @@ class Get_openshift_is_template(object):
     Get the default imagestreams and tempaltes under openshift namespace
     """
     def __init__(self, cluster_id):
-        self.api = "https://api." + cluster_id + ".openshift.com"
+        self.cluster_id = cluster_id
+        self.api = "https://api." + self.cluster_id + ".openshift.com"
         self.default_is_api = self.api + '/apis/image.openshift.io/v1/namespaces/openshift/imagestreams'
         self.default_template_api =  self.api + '/apis/template.openshift.io/v1/namespaces/openshift/templates'
 
@@ -20,7 +21,7 @@ class Get_openshift_is_template(object):
         headers = {
             'Authorization': 'Bearer ' + token
             }
-        print 'Getting the default imagestreams...'
+        print 'Getting the default imagestreams from ' + self.cluster_id + '...\n'
         self.session = requests.session()
         response = self.session.get(self.default_is_api, headers=headers)
         # loads to a python dict
@@ -30,7 +31,7 @@ class Get_openshift_is_template(object):
             is_dict[is_item['metadata']['name']] = []
             for tag_item in is_item['spec']['tags']:
                 is_dict[is_item['metadata']['name']].append(tag_item['name'])
-        print 'Successfully get the imagestreams.'
+        print 'Successfully get the imagestreams.\n'
 
         return is_dict
 
@@ -41,14 +42,14 @@ class Get_openshift_is_template(object):
         headers = {
             'Authorization': 'Bearer ' + token
             }
-        print 'Getting the default templates...'
+        print 'Getting the default templates from ' + self.cluster_id + '...\n'
         self.session = requests.session()
         response = self.session.get(self.default_template_api, headers=headers)
         # loads to a python dict
         json_response = json.loads(response.text)
         for t_item in json_response['items']:
             t_dict.append(t_item['metadata']['name'])
-        print 'Successfully get the templates.'
+        print 'Successfully get the templates.\n'
 
         return t_dict
 

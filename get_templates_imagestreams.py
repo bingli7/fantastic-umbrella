@@ -28,7 +28,7 @@ class Online_repo(object):
         headers = {
             'Authorization': 'token ' + token
         }
-        print "Getting the imagesteam tags from Online Starter repository... \n"
+        print "Getting the imagesteam tags from Online Starter Github repository... \n"
 
         self.session = requests.session()
         # Get from the Github API
@@ -59,7 +59,7 @@ class Online_repo(object):
         headers = {
             'Authorization': 'token ' + token
         }
-        print "Getting the templates from Online Starter repository... \n"
+        print "Getting the templates from Online Starter Github repository... \n"
 
         self.session = requests.session()
         # Get from the Github API
@@ -87,7 +87,7 @@ class Online_repo(object):
         headers = {
             'Authorization': 'token ' + token
         }
-        print "Getting the imagesteam tags from Online Pro repository... \n"
+        print "Getting the imagesteam tags from Online Pro Github repository... \n"
 
         self.session = requests.session()
         # Get from the Github API
@@ -118,7 +118,7 @@ class Online_repo(object):
         headers = {
             'Authorization': 'token ' + token
         }
-        print "Getting the templates from Online Pro repository...\n"
+        print "Getting the templates from Online Pro Github repository...\n"
 
         self.session = requests.session()
         # Get from the Github API
